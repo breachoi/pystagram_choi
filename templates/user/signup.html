@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>Sign Up</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="signup">
     <form method="POST" enctype="multipart/form-data">
+        <h1>Pystagram</h1>
         {% csrf_token %}
         {{ form.as_p }}
-        <button type = "submit">Sign up</button>
+        <button type = "submit" class = "btn btn-signup">Sign up</button>
+        <a href="/users/login">move to login</a>
     </form>
-</body>
-</html>
+</div>
+{% endblock %}
+

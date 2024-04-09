@@ -1,12 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>Feeds</h1>
-    <div>{{ user.username}} (ID: {{user.id}})</div>
-    <a href = "/users/logout/">Logout</a>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+    <nav>
+        <h1>
+            <a href="/posts/feeds/">Pystagram</a>
+        </h1>
+        <a href="/users/logout/">Logout</a>
+    </nav>
+<div id = "feeds" class="post-container">
+    {% for post in posts %}
+        <article class = "post">
+            <header class="post-header">
+                {% if post.user.profile_image %}
+                    <img src="{{ post.user.profile_image.url }}">
+                {% endif %}
+                <span>{{ post.user.username }}</span>
+            </header>
+
+            <div class="post-images splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        {% for image in post.postimage_set.all %}
+                            {% if image.photo %}
+                            <li class="splide__slide">
+                                <img src = "{{ image.photo.url }}">
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class = "post-content">
+                {{ post.content|linebreaksbr}}
+            </div>
+            <div class="post-buttons">
+            <div class="post-comments">
+                <ul>
+                    {% for comment in post.comment_set.all %}
+                        <li>
+                            <span>{{ comment.user.username}}</span>
+                            <spand>{{ comment.content }}</spand>
+                        </li>
+                {% endfor %}
+                </ul>
+            </div>
+                <button>Like(0)</button>
+                <span>Comments(0)</span>
+            </div>
+            <small>{{ post.created }}</small>
+            <div class="post-comment-create">
+                <input type="text" placeholder="writing comment">
+                <button type="submit">push</button>
+            </div>
+
+
+
+        </article>
+    {% endfor %}
+</div>
+
+ <script>
+        const elms = document.getElementsByClassName('splide')
+        for (let i = 0; i < elms.length; i++) {
+            new Splide(elms[i]).mount();
+        }
+ </script>
+{% endblock %}
+
