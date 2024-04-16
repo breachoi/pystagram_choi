@@ -606,20 +606,23 @@ article.post .post-comment-create form {
   flex-direction: row;
 }
 article.post .post-comment-create input {
-  padding: 15px 15px 15px 10px;
+  padding: 30px 30px 30px 25px;
   box-sizing: border-box;
   flex-grow: 1;
 }
 article.post .post-comment-create button {
+
   color: #0095f6;
   background-color: transparent;
   border: none;
   padding: 0 15px;
   cursor: pointer;
   transition-duration: 0.25s;
+
 }
 article.post .post-comment-create button:hover {
   font-weight: bold;
+
 }
 
 ul, ol {
